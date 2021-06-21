@@ -14,8 +14,8 @@ export class DropdownDirective {
 
   constructor(private elRef: ElementRef, private renderer: Renderer2) { }
 
-  @HostListener('click')
-  toggleDisplayed() {
-    this.displayed = !this.displayed;
+  @HostListener('document:click', ['$event'])
+  toggleDisplayed(event: Event) {
+    this.displayed = this.elRef.nativeElement.contains(event.target) ? !this.displayed : false;
   }
 }
