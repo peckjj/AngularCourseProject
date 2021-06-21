@@ -1,0 +1,55 @@
+import { Ingredient } from './../ingredient.model';
+import { EventEmitter, Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ShoppinglistService {
+
+  ingredientsChanged = new EventEmitter<Ingredient[]>();
+
+  private ingredients: Ingredient[] = [
+    new Ingredient("Apples", 5),
+    new Ingredient("Tomatoes", 10)
+  ];
+
+  constructor() { }
+
+  getIngredients() {
+    return this.ingredients.slice();
+  }
+
+  addIngredient(ingredient: Ingredient) {
+    // Capture any duplicate items in a list
+
+    let duplicates = this.ingredients.filter(elem => elem.name.toLowerCase() === ingredient.name.toLowerCase());
+
+    let total = 0;
+
+    // Count the total amount of these duplicates
+
+    for (let dup of duplicates) {
+      total += dup.amount;
+    }
+
+    // Add new amount to total
+
+    total += ingredient.amount;
+
+    // Remove the duplicates from the list
+
+    this.ingredients = this.ingredients.filter(
+      elem => elem.name.toLowerCase() !== ingredient.name.toLowerCase()
+    );
+
+    // Add ingredient to the list if amount is not 0
+
+    if (total > 0) {
+      this.ingredients.push(new Ingredient(ingredient.name.charAt(0).toUpperCase() + ingredient.name.slice(1).toLowerCase(), total));
+    }
+
+    // Notify subscribers of change.
+
+    this.ingredientsChanged.emit(this.ingredients.slice());
+  }
+}
