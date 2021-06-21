@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'course-project';
+
+  showRecipes = true;
+
+  onShowRecipes(shouldShow: boolean) {
+    this.showRecipes = shouldShow;
+  }
+
 }
