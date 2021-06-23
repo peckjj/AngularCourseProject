@@ -1,7 +1,7 @@
 import { RecipeService } from './../../shared/services/recipe.service';
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../recipe.model';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-list',
@@ -14,14 +14,14 @@ export class RecipeListComponent implements OnInit {
 
   recipes: Recipe[];
 
-  constructor(private recipeService: RecipeService) { }
+  constructor(private recipeService: RecipeService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.recipes = this.recipeService.getRecipes();
   }
 
-  onSelectRecipe(recipe: Recipe) {
-    this.recipeService.recipeSelected.emit(recipe);
+  onSelectRecipe(id: number) {
+    this.router.navigate([id], {relativeTo: this.route});
   }
 
 }
