@@ -14,7 +14,4 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  showRecipes(shouldShowRecipes: boolean) {
-    this.onShowRecipes.emit(shouldShowRecipes);
-  }
 }

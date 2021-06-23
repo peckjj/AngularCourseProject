@@ -20,8 +20,8 @@ export class RecipeListComponent implements OnInit {
     this.recipes = this.recipeService.getRecipes();
   }
 
-  onSelectRecipe(id: number) {
-    this.router.navigate([id], {relativeTo: this.route});
+  onNewRecipe() {
+    this.router.navigate(['new'], {relativeTo: this.route});
   }
 
 }
