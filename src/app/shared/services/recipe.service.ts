@@ -24,6 +24,8 @@ export class RecipeService {
     ),
   ];
 
+  recipesChanged = new Subject<Recipe[]>();
+
   recipeSelected = new Subject<Recipe>();
 
   constructor() {}
@@ -34,5 +36,24 @@ export class RecipeService {
 
   getRecipe(id: number) {
     return this.recipes[id];
+  }
+
+  addRecipe(recipe: Recipe) {
+    this.recipes.push(recipe);
+    this.emitChange();
+  }
+
+  updateRecipe(index: number, recipe: Recipe) {
+    this.recipes[index] = recipe;
+    this.emitChange();
+  }
+
+  emitChange() {
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  deleteRecipe(index: number) {
+    this.recipes.splice(index, 1);
+    this.emitChange();
   }
 }
