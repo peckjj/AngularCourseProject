@@ -2,6 +2,7 @@ import { ShoppinglistService } from './shared/services/shoppinglist.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { ShoppingListComponent } from './shopping/shopping-list.component';
@@ -35,7 +36,8 @@ import { BlankRecipeDetailComponent } from './recipes/blank-recipe-detail/blank-
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [ShoppinglistService],
   bootstrap: [AppComponent]

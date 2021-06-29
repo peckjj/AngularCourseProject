@@ -7,26 +7,15 @@ import { Ingredient } from '../ingredient.model';
   providedIn: 'root',
 })
 export class RecipeService {
-  private recipes: Recipe[] = [
-    new Recipe(
-      'A Test Recipe',
-      'This is a test',
-      'https://live.staticflickr.com/8397/29578087136_d4d10eb198_b.jpg',
-      [new Ingredient('Meat', 1),
-       new Ingredient('French Fries', 20)]
-    ),
-    new Recipe(
-      'A Test Recipe2',
-      'This is a test2',
-      'https://upload.wikimedia.org/wikipedia/commons/9/93/Hospital_food_NY.jpg',
-      [new Ingredient('Buns', 2),
-       new Ingredient('Meat', 1)]
-    ),
-  ];
+  private recipes: Recipe[] = [];
 
   recipesChanged = new Subject<Recipe[]>();
 
   recipeSelected = new Subject<Recipe>();
+
+  unsaved = false;
+
+  unsavedChanged = new Subject<boolean>();
 
   constructor() {}
 
@@ -40,20 +29,36 @@ export class RecipeService {
 
   addRecipe(recipe: Recipe) {
     this.recipes.push(recipe);
+    this.unsaved = true;
+    this.emitChange();
+  }
+
+  addRecipes(recipes: Recipe[]) {
+    this.recipes.push(...recipes);
+    this.unsaved = true;
     this.emitChange();
   }
 
   updateRecipe(index: number, recipe: Recipe) {
     this.recipes[index] = recipe;
+    this.unsaved = true;
     this.emitChange();
   }
 
   emitChange() {
     this.recipesChanged.next(this.recipes.slice());
+    this.unsavedChanged.next(this.unsaved);
   }
 
   deleteRecipe(index: number) {
     this.recipes.splice(index, 1);
+    this.unsaved = true;
+    this.emitChange();
+  }
+
+  deleteAllRecipes() {
+    this.recipes = [];
+    this.unsaved = true;
     this.emitChange();
   }
 }
