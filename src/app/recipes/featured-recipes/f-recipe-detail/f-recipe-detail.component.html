@@ -1,16 +1,16 @@
 <div class='root'>
-<div class="row">
-    <div class="col-xs-12">
-      <img [src]="featuredRecipe.imagePath" [alt]="featuredRecipe.name" class="image-responsive">
+<div class="row app-float-top">
+    <div class="col-xs-12 centered">
+      <img [src]="featuredRecipe.imagePath" [alt]="featuredRecipe.name" class="image-responsive strong-border">
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-12 centered centered-text">
       <h1>{{featuredRecipe.name}}</h1>
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-12 centered">
       <div class="btn-group" appDropdown>
         <button type="button" class="btn btn-primary dropdown-toggle">Manage Recipe <span class="caret"></span></button>
         <ul class="dropdown-menu">
@@ -22,15 +22,18 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-12 centered-text">
+      <hr>
       {{featuredRecipe.description}}
+      <hr>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <ul class="list-group">
+      <strong>Ingredients:</strong>
+      <ul class="list-group ing-list">
         <li class="list-group-item"
-            *ngFor="let ingredient of featuredRecipe.ingredients">{{ ingredient.name }} - {{ ingredient.amount }}</li>
+            *ngFor="let ingredient of featuredRecipe.ingredients">-&nbsp;&nbsp;&nbsp;{{ ingredient.name }} - {{ ingredient.amount }}</li>
       </ul>
       <p *ngIf="timesAddedToShoppingList > 0"><em>Added to Shopping List! (x{{timesAddedToShoppingList}})</em><span style="cursor: pointer; margin-left: 5px; font-size: xx-large; color: green; text-anchor:end;" (click)="addToShoppingList()">+</span></p>
     </div>

@@ -1,0 +1,16 @@
+hr {
+  border-top: 1px solid gold;
+}
+
+.centered {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.centered>button {
+  background-color: gold;
+  border: 1px solid gold;
+  color: black;
+  width: 75%;
+}

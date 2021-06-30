@@ -11,31 +11,51 @@ export class RecipeService {
   private featuredRecipes: Recipe[] = [
     {
       name: 'Flan with Grapefruit',
-      description: 'A delicious custard and caramel treat, with a fruity notes to truly make it special.',
+      description: 'A delicious custard and caramel treat, with fruity notes to truly make it special.',
       imagePath: 'https://assets.bonappetit.com/photos/5a05d34cba9fd6568203c83e/1:1/w_2560%2Cc_limit/flan-with-grapefruit.jpg',
       ingredients: [new Ingredient('small grapefruit', 1),
-                    new Ingredient('cups of sugar', 2),
-                    new Ingredient('large eggs', 4),
-                    new Ingredient('large egg yolks', 5),
-                    new Ingredient('cups of heavy cream', 1),
-                    new Ingredient('cups of whole milk', 1),
-                    new Ingredient('tsp of kosher salt', .25)]
+                    new Ingredient('cup(s) sugar', 2),
+                    new Ingredient('large egg', 4),
+                    new Ingredient('large egg yolk', 5),
+                    new Ingredient('cup(s) heavy cream', 1),
+                    new Ingredient('cup(s) whole milk', 1),
+                    new Ingredient('tsp kosher salt', .25)]
     },
     {
       name: 'Rum-Soaked Fruit and Coconut Crisp Sundaes',
       description: 'It only takes a few minutes to turn ripe, in-season berries into a syrupy topping for a not-so-typical summer sundae.',
       imagePath: 'https://assets.bonappetit.com/photos/60a3e587e172da2f6ba49adb/1:1/w_1600%2Cc_limit/0621-Rum-Soaked%2520Fruit%2520Sundaes.jpg',
       ingredients: [
-        new Ingredient('pound of strawberries, hulles, quartered', 1),
-        new Ingredient('oz. of raspberries', 12),
-        new Ingredient('tbsp of raw sugar', 6),
-        new Ingredient('tbsp of orange liqueur', 4),
-        new Ingredient('tsp of kosher salt', 4),
-        new Ingredient('cup of unsweetened cocunut flakes', 1),
-        new Ingredient('cup of sliced almonds', 0.5),
-        new Ingredient('tbsp of pure maple syrup', 1),
-        new Ingredient('pints of vanilla ice cream', 2),
-        new Ingredient('cups of whipped cream', 2)
+        new Ingredient('pound(s) strawberries', 1),
+        new Ingredient('oz. raspberries', 12),
+        new Ingredient('tbsp raw sugar', 6),
+        new Ingredient('tbsp orange liqueur', 4),
+        new Ingredient('tsp kosher salt', 4),
+        new Ingredient('cup(s) unsweetened cocunut flakes', 1),
+        new Ingredient('cup(s) sliced almonds', 0.5),
+        new Ingredient('tbsp pure maple syrup', 1),
+        new Ingredient('pint(s) vanilla ice cream', 2),
+        new Ingredient('cup(s) whipped cream', 2)
+      ]
+    },
+    {
+      name: 'Blueberry-Ginger Buckle',
+      description: "A member of the larger umbrella group of easy fruit desserts, a buckle features tons of fruit barely held together by tender cake. We're talking so much fruit that the cake buckles around it, hence the name.",
+      imagePath: 'https://assets.bonappetit.com/photos/5f10d7f5c510f35049efde44/16:9/w_2560%2Cc_limit/Basically-Buckle.jpg',
+      ingredients: [
+        new Ingredient('tbsp unsalted butter', 8),
+        new Ingredient('cup(s) raw pecans', 0.5),
+        new Ingredient('cup(s) all-purpose flour', 2.25),
+        new Ingredient('cup(s) dark brown sugar', 0.25),
+        new Ingredient('tsp ground ginger', 0.5),
+        new Ingredient('tsp kosher salt', 0.75),
+        new Ingredient('tsp baking powder', 1),
+        new Ingredient('tsp baking soda', 0.25),
+        new Ingredient('2" piece ginger', 1),
+        new Ingredient('cup(s) granulated sugar', 1),
+        new Ingredient('large egg', 2),
+        new Ingredient('cup(s) sour cream', 0.5),
+        new Ingredient('tsp vanilla extract', 1)
       ]
     }
   ];
