@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+.backdrop {
+  /* background: linear-gradient(140deg, blue, green); */
+  background: grey;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -5;
+}

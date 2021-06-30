@@ -65,10 +65,12 @@ export class ShoppinglistService {
   }
 
   addIngredients(ingredients: Ingredient[]) {
-    for (let ingredient of ingredients) {
-      this.addIngredient(ingredient, false);
+    if (ingredients) {
+      for (let ingredient of ingredients) {
+        this.addIngredient(ingredient, false);
+      }
+      this.emitChange();
     }
-    this.emitChange();
   }
 
   deleteIngredient(index: number) {

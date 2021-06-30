@@ -4,4 +4,5 @@ img {
 
 .root {
   overflow-y: scroll;
+  max-height: 85vh;
 }

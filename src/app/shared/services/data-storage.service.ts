@@ -31,7 +31,17 @@ export class DataStorageService {
       (response) => {
         console.log(response);
         this.rs.unsavedChanged.next(false);
-        this.isLoadingChanged.next(false);
+        this.stopLoading();
+      }
+    );
+  }
+
+  storeFeaturedRecipes() {
+    this.startLoading();
+    const recipes = this.rs.getFeaturedRecipes();
+    this.http.put('https://ng-course-project-61442-default-rtdb.firebaseio.com/featured-recipes.json', recipes).subscribe(
+      (response) => {
+        console.log(response);
         this.stopLoading();
       }
     );
@@ -52,6 +62,7 @@ export class DataStorageService {
   storeAll() {
     this.storeRecipes();
     this.storeShoppingList();
+    this.storeFeaturedRecipes();
   }
 
   fetchRecipes() {
@@ -75,17 +86,35 @@ export class DataStorageService {
         this.rs.unsavedChanged.next(false);
         this.stopLoading();
       }
+    ,
+      (error: Error) => {
+        console.error('DataStorageService: ' + error.message);
+
+        if (error.message !== 'recipes is null') {
+          alert("Error: " + error.message);
+        }
+        this.stopLoading();
+      }
     );
   }
 
   fetchShoppingList() {
     this.startLoading();
-    this.http.get<Ingredient[]>('https://ng-course-project-61442-default-rtdb.firebaseio.com/shopping-list.json').subscribe(
+    this.http.get<Ingredient[]>('https://ng-course-project-61442-default-rtdb.firebaseio.com/shopping-list.json')
+    .subscribe(
       (ingredients) => {
         this.sls.deleteAllIngredients();
         this.sls.addIngredients(ingredients);
         console.log(ingredients);
         this.sls.unsavedChanged.next(false);
+        this.stopLoading();
+      }
+    , (error: Error) => {
+        console.error("DataStorageService: " + error.message);
+
+        if (error.message !== 'ingredients is null') {
+          alert("Error: " + error.message);
+        }
         this.stopLoading();
       }
     );
