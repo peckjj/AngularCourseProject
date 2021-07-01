@@ -6,3 +6,7 @@ textarea.ng-invalid.ng-touched {
 img {
   max-height: 250px;
 }
+
+label {
+  color: white;
+}
