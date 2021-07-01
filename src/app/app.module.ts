@@ -1,4 +1,4 @@
-import { ShoppinglistService } from './shared/services/shoppinglist.service';
+import { ShoppinglistService } from './shared/directives/services/shoppinglist.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -20,6 +20,7 @@ import { FeaturedRecipesComponent } from './recipes/featured-recipes/featured-re
 import { FRecipeListComponent } from './recipes/featured-recipes/f-recipe-list/f-recipe-list.component';
 import { FBlankRecipeDetailComponent } from './recipes/featured-recipes/f-blank-recipe-detail/f-blank-recipe-detail.component';
 import { FRecipeDetailComponent } from './recipes/featured-recipes/f-recipe-detail/f-recipe-detail.component';
+import { HanoiComponent } from './hanoi/hanoi.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { FRecipeDetailComponent } from './recipes/featured-recipes/f-recipe-deta
     FeaturedRecipesComponent,
     FRecipeListComponent,
     FBlankRecipeDetailComponent,
-    FRecipeDetailComponent
+    FRecipeDetailComponent,
+    HanoiComponent
   ],
   imports: [
     BrowserModule,

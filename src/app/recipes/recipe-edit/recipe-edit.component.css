@@ -10,3 +10,23 @@ img {
 label {
   color: white;
 }
+
+.ing-list {
+  margin-right: 20px;
+  margin-top: 10px;
+  max-height: 25vh;
+}
+
+.content {
+  max-height: 75vh;
+  padding-right: 5px;
+}
+
+.root {
+  max-height: 85vh;
+}
+
+.centered>button {
+  width: 100%;
+  margin-bottom: 5px;
+}

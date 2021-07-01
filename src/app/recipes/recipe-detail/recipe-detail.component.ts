@@ -1,5 +1,5 @@
-import { RecipeService } from './../../shared/services/recipe.service';
-import { ShoppinglistService } from './../../shared/services/shoppinglist.service';
+import { RecipeService } from '../../shared/directives/services/recipe.service';
+import { ShoppinglistService } from '../../shared/directives/services/shoppinglist.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';

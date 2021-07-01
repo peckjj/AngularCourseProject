@@ -1,14 +1,15 @@
 nav {
   background-color: gold;
-  border: 1px solid black;
+  border: unset;
 }
 
 .app-active {
-  background-color: black;
+  background-color: #414141;
+  border: 1px inset #414141;
 }
 
 .app-active>a {
-  color: gold !important;
+  color: #e5bdf6 !important;
 }
 
 a {

@@ -1,4 +1,4 @@
-import { RecipeService } from './../../../shared/services/recipe.service';
+import { RecipeService } from '../../../shared/directives/services/recipe.service';
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../../recipe.model';
 
@@ -15,6 +15,12 @@ export class FRecipeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.featuredRecipes = this.rs.getFeaturedRecipes();
+
+    this.rs.featuredRecipesChanged.subscribe(
+      (recipes) => {
+        this.featuredRecipes = recipes;
+      }
+    );
   }
 
 }

@@ -1,3 +1,4 @@
+import { HanoiComponent } from './hanoi/hanoi.component';
 import { FeaturedRecipesComponent } from './recipes/featured-recipes/featured-recipes.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { NgModule } from "@angular/core";
@@ -21,7 +22,8 @@ const appRoutes: Routes = [
     {path: '', component: FBlankRecipeDetailComponent},
     {path: ':id', component: FRecipeDetailComponent}
   ]},
-  {path: 'shopping-list', component: ShoppingListComponent}
+  {path: 'shopping-list', component: ShoppingListComponent},
+  {path: 'hanoi', component: HanoiComponent}
 ];
 
 @NgModule({

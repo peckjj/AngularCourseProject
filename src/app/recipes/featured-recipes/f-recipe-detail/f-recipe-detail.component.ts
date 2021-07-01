@@ -1,6 +1,6 @@
-import { RecipeService } from './../../../shared/services/recipe.service';
-import { ActivatedRoute, Params } from '@angular/router';
-import { ShoppinglistService } from './../../../shared/services/shoppinglist.service';
+import { RecipeService } from '../../../shared/directives/services/recipe.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ShoppinglistService } from '../../../shared/directives/services/shoppinglist.service';
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../../recipe.model';
 
@@ -17,7 +17,7 @@ export class FRecipeDetailComponent implements OnInit {
 
   timesAddedToShoppingList = 0;
 
-  constructor(private sls: ShoppinglistService, private route: ActivatedRoute, private rs: RecipeService) { }
+  constructor(private sls: ShoppinglistService, private route: ActivatedRoute, private rs: RecipeService, private router: Router) { }
 
   addToShoppingList() {
     this.sls.addIngredients(this.featuredRecipe.ingredients);
@@ -32,6 +32,10 @@ export class FRecipeDetailComponent implements OnInit {
     this.route.params.subscribe(
       (params: Params) => {
         this.featuredRecipeId = params['id'];
+        if (this.rs.getFeaturedRecipes().length <= this.featuredRecipeId) {
+          this.router.navigate(['../'], {relativeTo: this.route});
+          return;
+        }
         this.featuredRecipe = this.rs.getFeaturedRecipe(this.featuredRecipeId);
       }
     );

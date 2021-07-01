@@ -27,24 +27,33 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 centered">
           <button
-            class="btn btn-success"
+            class="btn main success"
             type="submit"
             [disabled]="f.invalid"
           >{{ editMode ? 'Update' : 'Add' }}</button>
           <button
-            class="btn btn-danger"
+            class="btn main danger"
             type="button"
             style="margin-left: 5px; margin-right: 5px;"
             (click)="onDelete()"
             [disabled]="!editMode"
           >Delete</button>
-          <button
-            class="btn btn-primary"
-            type="button"
-            (click)="onClear()"
-          >Clear</button>
+          <div class="centered main">
+            <button
+              style="margin-right: 2px;"
+              class="btn main functional"
+              type="button"
+              (click)="onClear()"
+            >Clear Entry</button>
+            <button
+              style="margin-left: 3px"
+              class="btn main functional"
+              type="button"
+              (click)="clearList()"
+            >Clear List</button>
+          </div>
         </div>
       </div>
     </form>
