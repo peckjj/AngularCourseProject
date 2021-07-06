@@ -22,7 +22,8 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12 centered-text">
+      <div style="font-size: large;" class="col-xs-12 centered-text">
+        <p *ngIf="timesAddedToShoppingList > 0"><em>Added to Shopping List! (x{{timesAddedToShoppingList}})</em><span style="cursor: pointer; margin-left: 5px; font-size: xx-large; color: green; text-anchor:end;" (click)="addToShoppingList()">+</span></p>
         <hr>
         {{recipe.description}}
         <hr>
@@ -33,9 +34,17 @@
         <strong>Ingredients:</strong>
         <ul class="list-group ing-list">
           <li class="list-group-item metallic-reverse"
-              *ngFor="let ingredient of recipe.ingredients">-&nbsp;&nbsp;&nbsp;{{ ingredient.name }} - {{ ingredient.amount }}</li>
+              *ngFor="let ingredient of recipe.ingredients; let i = index"
+              (click)="addIngredient(ingredient, i)"
+          >-&nbsp;&nbsp;&nbsp;{{ ingredient.name }} - {{ ingredient.amount }}
+            <span
+              *ngIf="i === ingIndex"
+              style="float: right;"
+            >
+              <em>Added to Shopping List (x{{timesIngredientAdded}})</em>
+            </span>
+          </li>
         </ul>
-        <p *ngIf="timesAddedToShoppingList > 0"><em>Added to Shopping List! (x{{timesAddedToShoppingList}})</em><span style="cursor: pointer; margin-left: 5px; font-size: xx-large; color: green; text-anchor:end;" (click)="addToShoppingList()">+</span></p>
       </div>
     </div>
   </div>

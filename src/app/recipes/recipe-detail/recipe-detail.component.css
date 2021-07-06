@@ -20,8 +20,9 @@ img {
 
 .ing-list>li {
   box-shadow: 3px 3px 5px;
-  text-align: center;
+  text-align: left;
   border: none;
+  font-size: large;
 }
 
 .ing-list>li:hover {

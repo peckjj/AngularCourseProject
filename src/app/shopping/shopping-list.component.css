@@ -18,3 +18,7 @@ a:hover {
   overflow-x: hidden;
   max-height: 65vh;
 }
+
+.row {
+  width: 90vw;
+}

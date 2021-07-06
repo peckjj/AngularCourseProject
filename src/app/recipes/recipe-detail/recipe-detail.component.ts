@@ -1,3 +1,4 @@
+import { Ingredient } from 'src/app/shared/ingredient.model';
 import { RecipeService } from '../../shared/directives/services/recipe.service';
 import { ShoppinglistService } from '../../shared/directives/services/shoppinglist.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -15,6 +16,9 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   recipe: Recipe;
   recipeId: number;
   timesAddedToShoppingList = 0;
+
+  ingIndex: number = -1;
+  timesIngredientAdded = 0;
 
   recipesChangedSub: Subscription;
 
@@ -43,6 +47,16 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
         }
       }
     );
+  }
+
+  addIngredient(ingredient: Ingredient, index: number) {
+    if (this.ingIndex !== index) {
+      this.timesIngredientAdded = 0;
+    }
+
+    this.shoppingService.addIngredient(ingredient);
+    this.ingIndex = index;
+    this.timesIngredientAdded++;
   }
 
   ngOnDestroy() {
