@@ -157,4 +157,22 @@ export class DataStorageService {
     this.fetchFeaturedRecipes();
   }
 
+  async waitUntilDoneLoading() {
+    if (this.numLoading === 0) {
+      return Promise.resolve(null);
+    }
+    return new Promise(
+      (resolve, reject) => {
+        let sub = this.isLoadingChanged.subscribe(
+          (isLoading) => {
+            if (!isLoading) {
+              sub.unsubscribe();
+              resolve(null);
+            }
+          }
+        );
+      }
+    );
+  }
+
 }

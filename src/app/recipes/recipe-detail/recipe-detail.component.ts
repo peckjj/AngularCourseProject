@@ -5,6 +5,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { DataStorageService } from 'src/app/shared/directives/services/data-storage.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -17,53 +18,53 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   recipeId: number;
   timesAddedToShoppingList = 0;
 
-  ingIndex: number = -1;
-  timesIngredientAdded = 0;
+  ingIndex: {[index: number] : number};
 
   recipesChangedSub: Subscription;
 
-  constructor(private shoppingService: ShoppinglistService, private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private shoppingService: ShoppinglistService,
+              private recipeService: RecipeService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private dss: DataStorageService) { }
 
   ngOnInit(): void {
-    this.recipeId = +this.route.snapshot.params['id'];
-
-    this.recipe = this.recipeService.getRecipe(this.recipeId);
-
     this.route.params.subscribe(
       (params: Params) => {
         this.recipeId = +params['id'];
 
-        this.recipe = this.recipeService.getRecipe(this.recipeId);
-        this.timesIngredientAdded = 0;
-        this.timesAddedToShoppingList = 0;
-        this.ingIndex = -1;
-      }
-    );
-
-    this.recipesChangedSub = this.recipeService.recipesChanged.subscribe(
-      (recipes: Recipe[]) => {
-        if (recipes.length <= this.recipeId) {
-          this.recipe = new Recipe("", "", "", []);
-          this.router.navigate(["../"], {relativeTo: this.route});
-        } else {
-          this.recipe = recipes[this.recipeId];
+        if (this.recipeService.getRecipes().length <= this.recipeId) {
+          this.dss.waitUntilDoneLoading().then(
+            () => {
+              if (this.recipeService.getRecipes().length <= this.recipeId) {
+                this.router.navigate(["../"], {relativeTo: this.route});
+              } else {
+                this.recipe = this.recipeService.getRecipe(this.recipeId);
+                this.timesAddedToShoppingList = 0;
+                this.ingIndex = {};
+              }
+            }
+          );
+          return;
         }
+
+        this.recipe = this.recipeService.getRecipe(this.recipeId);
+        this.timesAddedToShoppingList = 0;
+        this.ingIndex = {};
       }
     );
   }
 
   addIngredient(ingredient: Ingredient, index: number) {
-    if (this.ingIndex !== index) {
-      this.timesIngredientAdded = 0;
+    if (!this.ingIndex[index]) {
+      this.ingIndex[index] = 0;
     }
 
     this.shoppingService.addIngredient(ingredient);
-    this.ingIndex = index;
-    this.timesIngredientAdded++;
+    this.ingIndex[index]++;
   }
 
   ngOnDestroy() {
-    this.recipesChangedSub.unsubscribe();
   }
 
   onDeleteRecipe() {

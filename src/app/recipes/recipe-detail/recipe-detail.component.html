@@ -38,10 +38,10 @@
               (click)="addIngredient(ingredient, i)"
           >-&nbsp;&nbsp;&nbsp;{{ ingredient.name }} - {{ ingredient.amount }}
             <span
-              *ngIf="i === ingIndex"
+              *ngIf="ingIndex[i] > 0"
               style="float: right;"
             >
-              <em>Added to Shopping List (x{{timesIngredientAdded}})</em>
+              <em>Added to Shopping List (x{{ingIndex[i]}})</em>
             </span>
           </li>
         </ul>

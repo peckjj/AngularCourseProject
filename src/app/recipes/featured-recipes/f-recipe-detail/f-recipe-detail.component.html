@@ -39,9 +39,9 @@
         >-&nbsp;&nbsp;&nbsp;{{ ingredient.name }} - {{ ingredient.amount }}
           <span
             style="float: right;"
-            *ngIf="i === ingIndex"
+            *ngIf="ingIndex[i]"
           >
-            <em>Added to Shopping List (x{{timesIngredientAdded}})</em>
+            <em>Added to Shopping List (x{{ingIndex[i]}})</em>
           </span>
         </li>
       </ul>
