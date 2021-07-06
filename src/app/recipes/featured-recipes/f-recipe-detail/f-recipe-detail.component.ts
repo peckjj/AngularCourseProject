@@ -41,8 +41,8 @@ export class FRecipeDetailComponent implements OnInit {
     this.route.params.subscribe(
       (params: Params) => {
         this.featuredRecipeId = params['id'];
-        if (this.rs.getFeaturedRecipes().length <= this.featuredRecipeId) {
-          this.dss.waitUntilDoneLoading().then(
+
+        this.dss.waitUntilDoneLoading().then(
             () => {
               if (this.rs.getFeaturedRecipes().length <= this.featuredRecipeId) {
                 this.router.navigate(['../'], {relativeTo: this.route});
@@ -53,11 +53,6 @@ export class FRecipeDetailComponent implements OnInit {
               }
             }
           );
-          return;
-        }
-        this.featuredRecipe = this.rs.getFeaturedRecipe(this.featuredRecipeId);
-        this.timesAddedToShoppingList = 0;
-        this.ingIndex = {};
       }
     );
   }

@@ -46,17 +46,6 @@ export class DataStorageService {
     );
   }
 
-  storeFeaturedRecipes() {
-    this.startLoading();
-    const recipes = this.rs.getFeaturedRecipes();
-    this.http.put('https://ng-course-project-61442-default-rtdb.firebaseio.com/featured-recipes.json', recipes).subscribe(
-      (response) => {
-        console.log(response);
-        this.stopLoading();
-      }
-    );
-  }
-
   storeShoppingList() {
     this.startLoading();
     const sList = this.sls.getIngredients();
@@ -72,7 +61,6 @@ export class DataStorageService {
   storeAll() {
     this.storeRecipes();
     this.storeShoppingList();
-    // this.storeFeaturedRecipes();
   }
 
   fetchFeaturedRecipes() {

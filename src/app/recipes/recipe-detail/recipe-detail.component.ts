@@ -33,24 +33,17 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
       (params: Params) => {
         this.recipeId = +params['id'];
 
-        if (this.recipeService.getRecipes().length <= this.recipeId) {
-          this.dss.waitUntilDoneLoading().then(
-            () => {
-              if (this.recipeService.getRecipes().length <= this.recipeId) {
-                this.router.navigate(["../"], {relativeTo: this.route});
-              } else {
-                this.recipe = this.recipeService.getRecipe(this.recipeId);
-                this.timesAddedToShoppingList = 0;
-                this.ingIndex = {};
-              }
+        this.dss.waitUntilDoneLoading().then(
+          () => {
+            if (this.recipeService.getRecipes().length <= this.recipeId) {
+              this.router.navigate(["../"], {relativeTo: this.route});
+            } else {
+              this.recipe = this.recipeService.getRecipe(this.recipeId);
+              this.timesAddedToShoppingList = 0;
+              this.ingIndex = {};
             }
-          );
-          return;
-        }
-
-        this.recipe = this.recipeService.getRecipe(this.recipeId);
-        this.timesAddedToShoppingList = 0;
-        this.ingIndex = {};
+          }
+        );
       }
     );
   }
