@@ -72,6 +72,7 @@ export class DataStorageService {
   storeAll() {
     this.storeRecipes();
     this.storeShoppingList();
+    // this.storeFeaturedRecipes();
   }
 
   fetchFeaturedRecipes() {

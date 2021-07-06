@@ -34,6 +34,9 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
         this.recipeId = +params['id'];
 
         this.recipe = this.recipeService.getRecipe(this.recipeId);
+        this.timesIngredientAdded = 0;
+        this.timesAddedToShoppingList = 0;
+        this.ingIndex = -1;
       }
     );
 
