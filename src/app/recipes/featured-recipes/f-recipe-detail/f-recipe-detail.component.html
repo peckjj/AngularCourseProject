@@ -1,4 +1,4 @@
-<div class='root metallic scrollable'>
+<div *ngIf="featuredRecipe" class='root metallic scrollable'>
 <div class="row app-float-top">
     <div class="col-xs-12 centered">
       <img [src]="featuredRecipe.imagePath" [alt]="featuredRecipe.name" class="image-responsive strong-border">

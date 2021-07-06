@@ -41,6 +41,9 @@ export class FRecipeDetailComponent implements OnInit {
           return;
         }
         this.featuredRecipe = this.rs.getFeaturedRecipe(this.featuredRecipeId);
+        this.timesAddedToShoppingList = 0;
+        this.ingIndex = -1;
+        this.timesIngredientAdded = 0;
       }
     );
   }
