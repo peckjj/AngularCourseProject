@@ -1,62 +1,19 @@
-import { ShoppinglistService } from '../shared/directives/services/shoppinglist.service';
-import { RecipeService } from '../shared/directives/services/recipe.service';
-import { DataStorageService } from '../shared/directives/services/data-storage.service';
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component } from '@angular/core';
+
+import { DataStorageService } from '../shared/data-storage.service';
 
 @Component({
   selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  templateUrl: './header.component.html'
 })
-export class HeaderComponent implements OnInit, OnDestroy {
-
-  @Output() onShowRecipes = new EventEmitter<boolean>();
-
-  recipesUnsavedSub: Subscription;
-  shoppingListUnsavedSub: Subscription;
-
-  recipesUnsaved = false;
-  shoppingListUnsaved = false;
-
-  loadingSub: Subscription;
-
-  isLoading = false;
-
-  constructor(private dss: DataStorageService, private rs: RecipeService, private sls: ShoppinglistService) { }
-
-  ngOnInit(): void {
-    this.recipesUnsavedSub = this.rs.unsavedChanged.subscribe(
-      (unsaved) => {
-        this.recipesUnsaved = unsaved;
-      }
-    );
-
-    this.shoppingListUnsavedSub = this.sls.unsavedChanged.subscribe(
-      (unsaved) => {
-        this.shoppingListUnsaved = unsaved;
-      }
-    );
-
-    this.loadingSub = this.dss.isLoadingChanged.subscribe(
-      (isLoading) => {
-        this.isLoading = isLoading;
-      }
-    );
-  }
+export class HeaderComponent {
+  constructor(private dataStorageService: DataStorageService) {}
 
   onSaveData() {
-    this.dss.storeAll();
+    this.dataStorageService.storeRecipes();
   }
 
   onFetchData() {
-    this.dss.fetchAll();
+    this.dataStorageService.fetchRecipes().subscribe();
   }
-
-  ngOnDestroy() {
-    this.shoppingListUnsavedSub.unsubscribe();
-    this.recipesUnsavedSub.unsubscribe();
-    this.loadingSub.unsubscribe();
-  }
-
 }

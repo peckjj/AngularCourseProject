@@ -1,24 +1,14 @@
-import { DataStorageService } from './shared/directives/services/data-storage.service';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  title = 'course-project';
+export class AppComponent {
+  loadedFeature = 'recipe';
 
-  showRecipes = true;
-
-  constructor(private dss: DataStorageService) {}
-
-  ngOnInit() {
-    this.dss.fetchAll();
+  onNavigate(feature: string) {
+    this.loadedFeature = feature;
   }
-
-  onShowRecipes(shouldShow: boolean) {
-    this.showRecipes = shouldShow;
-  }
-
 }
