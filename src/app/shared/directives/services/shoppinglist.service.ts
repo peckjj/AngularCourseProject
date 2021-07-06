@@ -1,4 +1,4 @@
-import { Ingredient } from './../ingredient.model';
+import { Ingredient } from '../../ingredient.model';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
@@ -65,10 +65,12 @@ export class ShoppinglistService {
   }
 
   addIngredients(ingredients: Ingredient[]) {
-    for (let ingredient of ingredients) {
-      this.addIngredient(ingredient, false);
+    if (ingredients) {
+      for (let ingredient of ingredients) {
+        this.addIngredient(ingredient, false);
+      }
+      this.emitChange();
     }
-    this.emitChange();
   }
 
   deleteIngredient(index: number) {

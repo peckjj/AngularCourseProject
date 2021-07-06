@@ -1,4 +1,4 @@
-import { ShoppinglistService } from './shared/services/shoppinglist.service';
+import { ShoppinglistService } from './shared/directives/services/shoppinglist.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -16,6 +16,11 @@ import { DropdownDirective } from './shared/directives/dropdown.directive';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BlankRecipeDetailComponent } from './recipes/blank-recipe-detail/blank-recipe-detail.component';
+import { FeaturedRecipesComponent } from './recipes/featured-recipes/featured-recipes.component';
+import { FRecipeListComponent } from './recipes/featured-recipes/f-recipe-list/f-recipe-list.component';
+import { FBlankRecipeDetailComponent } from './recipes/featured-recipes/f-blank-recipe-detail/f-blank-recipe-detail.component';
+import { FRecipeDetailComponent } from './recipes/featured-recipes/f-recipe-detail/f-recipe-detail.component';
+import { HanoiComponent } from './hanoi/hanoi.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,12 @@ import { BlankRecipeDetailComponent } from './recipes/blank-recipe-detail/blank-
     ShoppingListComponent,
     DropdownDirective,
     RecipeEditComponent,
-    BlankRecipeDetailComponent
+    BlankRecipeDetailComponent,
+    FeaturedRecipesComponent,
+    FRecipeListComponent,
+    FBlankRecipeDetailComponent,
+    FRecipeDetailComponent,
+    HanoiComponent
   ],
   imports: [
     BrowserModule,

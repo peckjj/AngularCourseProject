@@ -1,6 +1,6 @@
-import { ShoppinglistService } from './../shared/services/shoppinglist.service';
-import { RecipeService } from './../shared/services/recipe.service';
-import { DataStorageService } from './../shared/services/data-storage.service';
+import { ShoppinglistService } from '../shared/directives/services/shoppinglist.service';
+import { RecipeService } from '../shared/directives/services/recipe.service';
+import { DataStorageService } from '../shared/directives/services/data-storage.service';
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 

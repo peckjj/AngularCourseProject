@@ -1,4 +1,4 @@
-import { ShoppinglistService } from './../../shared/services/shoppinglist.service';
+import { ShoppinglistService } from '../../shared/directives/services/shoppinglist.service';
 import { Component,
          EventEmitter,
          OnDestroy,
@@ -55,6 +55,10 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
   onClear() {
     this.slForm.reset();
     this.editMode = false;
+  }
+
+  clearList() {
+    this.shoppingListService.deleteAllIngredients();
   }
 
   onSubmit(form: NgForm) {

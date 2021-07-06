@@ -3,7 +3,7 @@ import { RecipeService } from './recipe.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Recipe } from 'src/app/recipes/recipe.model';
-import { Ingredient } from '../ingredient.model';
+import { Ingredient } from '../../ingredient.model';
 import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
@@ -14,14 +14,24 @@ export class DataStorageService {
 
   isLoadingChanged = new Subject<boolean>();
 
+  numLoading = 0;
+
   constructor(private http: HttpClient, private rs: RecipeService, private sls: ShoppinglistService) { }
 
   startLoading() {
-    this.isLoadingChanged.next(true);
+    this.numLoading++;
+
+    if (this.numLoading === 1) {
+      this.isLoadingChanged.next(true);
+    }
   }
 
   stopLoading() {
-    this.isLoadingChanged.next(false);
+    this.numLoading--;
+
+    if (this.numLoading === 0) {
+      this.isLoadingChanged.next(false);
+    }
   }
 
   storeRecipes() {
@@ -31,7 +41,17 @@ export class DataStorageService {
       (response) => {
         console.log(response);
         this.rs.unsavedChanged.next(false);
-        this.isLoadingChanged.next(false);
+        this.stopLoading();
+      }
+    );
+  }
+
+  storeFeaturedRecipes() {
+    this.startLoading();
+    const recipes = this.rs.getFeaturedRecipes();
+    this.http.put('https://ng-course-project-61442-default-rtdb.firebaseio.com/featured-recipes.json', recipes).subscribe(
+      (response) => {
+        console.log(response);
         this.stopLoading();
       }
     );
@@ -52,6 +72,27 @@ export class DataStorageService {
   storeAll() {
     this.storeRecipes();
     this.storeShoppingList();
+  }
+
+  fetchFeaturedRecipes() {
+    this .startLoading();
+    this.http.get<Recipe[]>('https://ng-course-project-61442-default-rtdb.firebaseio.com/featured-recipes.json')
+    .pipe(map(
+      (recipes) => {
+        return recipes.map(
+          recipe => {
+            recipe = {...recipe, ingredients: recipe.ingredients ? recipe.ingredients : []};
+            return recipe;
+          }
+        );
+      }
+    ))
+    .subscribe(
+      (recipes) => {
+        this.rs.setFeaturedRecipes(recipes);
+        this.stopLoading();
+      }
+    );
   }
 
   fetchRecipes() {
@@ -75,17 +116,35 @@ export class DataStorageService {
         this.rs.unsavedChanged.next(false);
         this.stopLoading();
       }
+    ,
+      (error: Error) => {
+        console.error('DataStorageService: ' + error.message);
+
+        if (error.message !== 'recipes is null') {
+          alert("Error: " + error.message);
+        }
+        this.stopLoading();
+      }
     );
   }
 
   fetchShoppingList() {
     this.startLoading();
-    this.http.get<Ingredient[]>('https://ng-course-project-61442-default-rtdb.firebaseio.com/shopping-list.json').subscribe(
+    this.http.get<Ingredient[]>('https://ng-course-project-61442-default-rtdb.firebaseio.com/shopping-list.json')
+    .subscribe(
       (ingredients) => {
         this.sls.deleteAllIngredients();
         this.sls.addIngredients(ingredients);
         console.log(ingredients);
         this.sls.unsavedChanged.next(false);
+        this.stopLoading();
+      }
+    , (error: Error) => {
+        console.error("DataStorageService: " + error.message);
+
+        if (error.message !== 'ingredients is null') {
+          alert("Error: " + error.message);
+        }
         this.stopLoading();
       }
     );
@@ -94,6 +153,7 @@ export class DataStorageService {
   fetchAll() {
     this.fetchRecipes();
     this.fetchShoppingList();
+    this.fetchFeaturedRecipes();
   }
 
 }

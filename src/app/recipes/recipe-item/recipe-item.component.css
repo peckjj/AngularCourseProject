@@ -1,0 +1,12 @@
+.list-group-item {
+  margin-bottom: 10px;
+}
+
+a {
+  border: none;
+  opacity: 50%;
+}
+
+.app-active {
+  opacity: 100%;
+}
